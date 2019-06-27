@@ -20,8 +20,9 @@ RUN apk update && apk upgrade && apk add --update shadow
 
 RUN useradd -m -p "$USR_PSS" "$USR_NME" && \
     usermod -aG users "$USR_NME" && \
-    adduser "$USR_NME" wheel
-    #usermod -aG root "$USR_NME"
+    adduser "$USR_NME" wheel && \
+    usermod -aG root "$USR_NME" && \
+    echo "$USR_NME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers
 
 user "$USR_NME"
 RUN echo "Welcome $USR_NME"
